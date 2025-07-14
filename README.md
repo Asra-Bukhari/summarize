@@ -82,17 +82,6 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 * Connected via `SUPABASE_URL` and `SUPABASE_KEY`
 * **Table**: `summaries`
 
----
-
-## 🌐 Deployment (Vercel)
-
-1. Push your code to GitHub
-2. Import the repo on [vercel.com](https://vercel.com)
-3. Add the environment variables listed above
-4. Click **Deploy**
-
-✅ Runs on free, serverless infrastructure.
-
 
 ---
 
@@ -124,7 +113,6 @@ npm run dev
 
 Visit: `http://localhost:3000`
 
----
 
 ---
 
@@ -133,7 +121,7 @@ Visit: `http://localhost:3000`
 **Asra Bukhari**  
 
 - 🐙 GitHub: [@Asra-Bukhari](https://github.com/Asra-Bukhari)  
-- 📁 Repo: [summarizer](https://github.com/Asra-Bukhari/summarizer)
+- 📁 Repo: [SummarAIze](https://github.com/Asra-Bukhari/summarize)
 
 ---
 
