@@ -6,9 +6,6 @@ if (!COHERE_API_KEY) {
   throw new Error("Cohere API key not found in .env.local");
 }
 
-/**
- * Calls Cohere Summarize API to summarize given text.
- */
 export async function getCohereSummary(text: string): Promise<string> {
   try {
     const response = await axios.post(

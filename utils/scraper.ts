@@ -1,15 +1,12 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 
-/**
- * Scrapes blog content (paragraphs) from a given URL.
- */
 export async function scrapeBlogContent(url: string): Promise<string> {
   try {
     const { data: html } = await axios.get(url);
     const $ = cheerio.load(html);
 
-    // Select all <p> tags (or adjust for blog-specific structure)
+    
     const paragraphs = $("p").map((_, el) => $(el).text().trim()).get();
 
     // Combine paragraphs into one string

@@ -1,4 +1,4 @@
-// components/InputForm.tsx
+
 "use client";
 
 import { useState } from "react";
@@ -28,7 +28,7 @@ export default function InputForm({ setIsLoading }: Props) {
     }
 
     setLoading(true);
-    setIsLoading?.(true); // Start global loading view
+    setIsLoading?.(true); 
 
     try {
       const res = await fetch("/api/summarize", {

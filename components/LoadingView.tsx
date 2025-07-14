@@ -16,7 +16,7 @@ export default function LoadingView() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % steps.length);
-    }, 4000); // Switch every 2 seconds
+    }, 5000); 
     return () => clearInterval(interval);
   }, []);
 

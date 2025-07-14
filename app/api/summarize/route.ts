@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const { url } = await req.json();
     if (!url) return NextResponse.json({ error: "URL is required." }, { status: 400 });
 
-    // 1. Scrape blog content
+    // Scrape blog content
     let content = "";
     try {
       content = await scrapeBlogContent(url);
@@ -22,17 +22,17 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No readable content found on the blog." }, { status: 404 });
     }
 
-    // 2. Summarize
+    // Summarize
     const summary = await getCohereSummary(content);
 
-    // 3. Translate
+    // Translate
     const urdu = await translateToUrdu(summary);
 
-    // 4. Save to Mongo
+    //  Save to Mongo
     await connectToMongo();
     await Blog.create({ url, content });
 
-    // 5. Save to Supabase
+    // Save to Supabase
     await supabase.from("summaries").insert([{ url, summary, urdu_summary: urdu }]);
 
     return NextResponse.json({ summary, urdu }, { status: 200 });

@@ -68,9 +68,9 @@ export default function ResultPage() {
           <Download className="w-5 h-5 mr-1" />
           <span className="text-sm font-medium">Download PDF</span>
         </button>
-
-       {/* Title with Logo */}
-<div className="flex items-center justify-center mt-6 sm:mt-0">
+        
+{/* Title with Logo */}
+<div className="flex items-center justify-center mt-6 sm:mt-0 ml-4 sm:ml-0">
   <Image src="/logo.png" alt="logo" width={52} height={52} />
   <h1
     className="text-2xl sm:text-2xl font-bold text-center"

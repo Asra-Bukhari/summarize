@@ -1,5 +1,5 @@
 export async function translateToUrdu(text: string): Promise<string> {
-  const chunks = text.match(/.{1,500}/g) || []; // Split into 500-char chunks
+  const chunks = text.match(/.{1,500}/g) || []; 
   let translated = "";
 
   for (const chunk of chunks) {
