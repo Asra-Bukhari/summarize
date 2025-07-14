@@ -70,7 +70,7 @@ export default function ResultPage() {
         </button>
 
 {/* Title with Logo */}
-<div className="flex items-center justify-center ml-[-30px] sm:ml-[-45px]">
+<div className="flex items-center justify-center ml-[-30px] sm:ml-[-45px] mt-15 sm:mt-0">
   <Image src="/logo.png" alt="logo" width={52} height={52} />
   <h1
     className="text-2xl sm:text-2xl font-bold text-center -ml-1"
@@ -83,6 +83,7 @@ export default function ResultPage() {
     <span className="text-[#50C9CE]">ze</span>
   </h1>
 </div>
+
 
 
 
