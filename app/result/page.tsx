@@ -69,19 +69,21 @@ export default function ResultPage() {
           <span className="text-sm font-medium">Download PDF</span>
         </button>
 
-        {/* Title with Logo */}
-        <div className="flex items-center justify-center">
-          <Image src="/logo.png" alt="logo" width={52} height={52} />
-          <h1 className="text-2xl sm:text-2xl font-bold text-center"
-            style={{
-    textShadow: "1px 1px 0 #00000022, 2px 2px 0 #00000011",
-    
-  }}>
-            <span className="text-[#50C9CE]">Summar</span>
-            <span className="text-blue-900">AI</span>
-            <span className="text-[#50C9CE]">ze</span>
-          </h1>
-        </div>
+       {/* Title with Logo */}
+<div className="flex items-center justify-center mt-6 sm:mt-0">
+  <Image src="/logo.png" alt="logo" width={52} height={52} />
+  <h1
+    className="text-2xl sm:text-2xl font-bold text-center"
+    style={{
+      textShadow: "1px 1px 0 #00000022, 2px 2px 0 #00000011",
+    }}
+  >
+    <span className="text-[#50C9CE]">Summar</span>
+    <span className="text-blue-900">AI</span>
+    <span className="text-[#50C9CE]">ze</span>
+  </h1>
+</div>
+
 
         {/* English Summary */}
         <SummaryCard summary={summary} />
