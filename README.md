@@ -2,7 +2,7 @@
 
 **SummarAIze** is a full-stack AI-powered web app that allows users to input any blog/article URL and instantly receive:
 - ✍️ A concise **English summary**
-- 🌙 A translated **Urdu version** of the summary
+- 💬 A translated **Urdu version** of the summary
 
 This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB**, **Supabase**, and beautiful Tailwind-styled animations for a smooth and engaging user experience.
 
