@@ -28,7 +28,7 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 |--------------|----------------------------------------------------------------------|
 | **Frontend** | Next.js 14, Tailwind CSS, Framer Motion                              |
 | **Backend**  | API Routes in Next.js                                                |
-| **AI**       | [Cohere Summarize API](https://docs.cohere.com/docs/summarize)       |
+| **AI**       | Cohere Summarizer AI
 | **DBs**      | MongoDB for user/blog storage<br>Supabase for optional analytics     |
 | **PDF**      | jsPDF for generating downloadable PDF summaries                      |
 
