@@ -70,10 +70,10 @@ export default function ResultPage() {
         </button>
 
 {/* Title with Logo */}
-<div className="flex items-center justify-center mt-6 sm:mt-0 ml-10 sm:ml-0">
+<div className="flex items-center justify-center ml-[-30px] sm:ml-[-45px]">
   <Image src="/logo.png" alt="logo" width={52} height={52} />
   <h1
-    className="text-2xl sm:text-2xl font-bold text-center"
+    className="text-2xl sm:text-2xl font-bold text-center -ml-1"
     style={{
       textShadow: "1px 1px 0 #00000022, 2px 2px 0 #00000011",
     }}
@@ -83,6 +83,8 @@ export default function ResultPage() {
     <span className="text-[#50C9CE]">ze</span>
   </h1>
 </div>
+
+
 
 
         {/* English Summary */}
