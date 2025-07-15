@@ -8,6 +8,7 @@ import LoadingView from "@/components/LoadingView";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   return (
     <main className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#aee1f9] via-[#a6f0d1] to-[#c4e2ff] px-4 py-8 sm:py-0">
@@ -44,7 +45,15 @@ export default function HomePage() {
         </div>
 
         {/* Conditional LoadingView */}
-        {isLoading ? <LoadingView /> : <InputForm setIsLoading={setIsLoading} />}
+        {isLoading ? (
+          <LoadingView />
+        ) : (
+          <InputForm
+            setIsLoading={setIsLoading}
+            error={error}
+            setError={setError}
+          />
+        )}
       </motion.div>
     </main>
   );

@@ -4,21 +4,26 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const steps = [
-  "Summarizing your blog...",
-  "Translating to Urdu...",
-  "Refining content...",
-  "Almost there...",
+  "Checking the url",
+  "Summarizing your blog",
+  "Translating to Urdu",
+  "Refining content",
+  "Almost there",
 ];
 
 export default function LoadingView() {
   const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % steps.length);
-    }, 5000); 
-    return () => clearInterval(interval);
-  }, []);
+useEffect(() => {
+  if (index >= steps.length - 1) return; 
+
+  const interval = setInterval(() => {
+    setIndex((prev) => prev + 1); 
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, [index]);
+
 
   return (
     <div className="flex flex-col items-center justify-center mt-8 space-y-4">
@@ -37,7 +42,7 @@ export default function LoadingView() {
       </AnimatePresence>
 
       {/* Animated Dots */}
-      <div className="flex items-center space-x-1 text-2xl font-bold text-[#50C9CE]">
+      <div className="flex items-center space-x-1 text-2xl font-bold text-blue-800">
         <span className="animate-bounce [animation-delay:0ms]">.</span>
         <span className="animate-bounce [animation-delay:200ms]">.</span>
         <span className="animate-bounce [animation-delay:400ms]">.</span>

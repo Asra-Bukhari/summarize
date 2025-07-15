@@ -7,10 +7,9 @@ import { translateToUrdu } from "@/lib/translator";
 
 export async function POST(req: Request) {
   try {
-    const { url } = await req.json();
+    const { url, length = "medium", format = "paragraph" } = await req.json();
     if (!url) return NextResponse.json({ error: "URL is required." }, { status: 400 });
 
-    // Scrape blog content
     let content = "";
     try {
       content = await scrapeBlogContent(url);
@@ -22,17 +21,30 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No readable content found on the blog." }, { status: 404 });
     }
 
-    // Summarize
-    const summary = await getCohereSummary(content);
+    const summary = await getCohereSummary(content, length, format);
+    
+    let urdu = "";
+    if (format === "bullets") {
+      const bullets = summary
+        .split(/\n|•|-/)
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0);
 
-    // Translate
-    const urdu = await translateToUrdu(summary);
+      const translatedBullets = await Promise.all(
+        bullets.map(async (point) => {
+          const translated = await translateToUrdu(point);
+          return `- ${translated}`;
+        })
+      );
 
-    //  Save to Mongo
+      urdu = translatedBullets.join("\n");
+    } else {
+      urdu = await translateToUrdu(summary);
+    }
+
     await connectToMongo();
     await Blog.create({ url, content });
 
-    // Save to Supabase
     await supabase.from("summaries").insert([{ url, summary, urdu_summary: urdu }]);
 
     return NextResponse.json({ summary, urdu }, { status: 200 });
@@ -42,3 +54,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Something went wrong on the server." }, { status: 500 });
   }
 }
+

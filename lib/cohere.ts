@@ -6,15 +6,19 @@ if (!COHERE_API_KEY) {
   throw new Error("Cohere API key not found in .env.local");
 }
 
-export async function getCohereSummary(text: string): Promise<string> {
+export async function getCohereSummary(
+  text: string,
+  length: "short" | "medium" | "long" = "medium",
+  format: "paragraph" | "bullets" = "paragraph"
+): Promise<string> {
   try {
     const response = await axios.post(
       "https://api.cohere.ai/v1/summarize",
       {
         text,
-        length: "medium",        // short | medium | long
-        format: "paragraph",     // paragraph | bullets
-        extractiveness: "low",   // low = creative
+        length,
+        format,
+        extractiveness: "low",
         temperature: 0.3,
       },
       {
@@ -31,3 +35,4 @@ export async function getCohereSummary(text: string): Promise<string> {
     throw new Error("Failed to summarize text with Cohere.");
   }
 }
+

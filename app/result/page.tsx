@@ -85,9 +85,6 @@ export default function ResultPage() {
 </div>
 
 
-
-
-
         {/* English Summary */}
         <SummaryCard summary={summary} />
 
