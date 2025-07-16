@@ -93,18 +93,40 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 
 ## 📊 Databases
 
-### 🟢 MongoDB
+<h3>🟢 MongoDB</h3>
 
-* Used to store **blog content**, summaries, and optionally users.                | Mongo Database                        |       
-* Connected via `MONGODB_URI`                                                     | --------------------------------------|
-* **Collection**: `blogs`                                                         | ![mongoDB](./screenshots/mongoDB.png) |
+<table>
+  <tr>
+    <td width="60%">
+      <ul>
+        <li>Used to store <strong>blog content</strong>, summaries, and optionally users.</li>
+        <li>Connected via <code>MONGODB_URI</code></li>
+        <li><strong>Collection</strong>: <code>blogs</code></li>
+      </ul>
+    </td>
+    <td>
+      <img src="./screenshots/mongoDB.png" alt="MongoDB Screenshot" width="300"/>
+    </td>
+  </tr>
+</table>
 
-### 🟣 Supabase
 
-* Used to store **summary metadata** and history.                                | Supabase                                |
-* Connected via `SUPABASE_URL` and `SUPABASE_KEY`                                | ----------------------------------------|
-* **Table**: `summaries`                                                         | ![Supabase](./screenshots/supabase.png) |
+<h3>🟣 Supabase</h3>
 
+<table>
+  <tr>
+    <td width="60%">
+      <ul>
+        <li>Used to store <strong>summary metadata</strong> and history.</li>
+        <li>Connected via <code>SUPABASE_URL</code> and <code>SUPABASE_KEY</code></li>
+        <li><strong>Table</strong>: <code>summaries</code></li>
+      </ul>
+    </td>
+    <td>
+      <img src="./screenshots/supabase.png" alt="Supabase Screenshot" width="300"/>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -152,14 +174,31 @@ docker-compose up --build
 
 If any **server-side error** occurs — such as scraping failures, API timeouts, or translation issues — the app will automatically send an email to the developer with all relevant details.
 
-- ✅ Automatically triggered on server errors                      
-- 📩 Sends HTML-formatted emails using **Gmail SMTP**              
-- 🔁 Powered by **n8n Webhook + Send Email node**
-- 🔧 Configured in `utils/bugReporter.ts`
-- 🕵️ Email includes:
-  - Blog **URL**                                                 | n8n Workflow                           |
-  - **Error** message                                            | ---------------------------------------|
-  - **Timestamp** of the issue                                   | ![n8n](./screenshots/n8n-workflow.png) |
+<h3>🐞 Bug Report Automation</h3>
+
+<table>
+  <tr>
+    <td width="60%">
+      <ul>
+        <li>✅ Automatically triggered on server errors</li>
+        <li>📩 Sends HTML-formatted emails using <strong>Gmail SMTP</strong></li>
+        <li>🔁 Powered by <strong>n8n Webhook + Send Email</strong> node</li>
+        <li>🔧 Configured in <code>utils/bugReporter.ts</code></li>
+        <li>🕵️ Email includes:
+          <ul>
+            <li>Blog <strong>URL</strong></li>
+            <li><strong>Error</strong> message</li>
+            <li><strong>Timestamp</strong> of the issue</li>
+          </ul>
+        </li>
+      </ul>
+    </td>
+    <td>
+      <img src="./screenshots/n8n-workflow.png" alt="n8n Workflow Screenshot" width="300"/>
+    </td>
+  </tr>
+</table>
+
 
 > This helps the developer (me) get notified immediately when something goes wrong.
 
