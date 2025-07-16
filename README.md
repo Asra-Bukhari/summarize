@@ -10,15 +10,19 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 
 ## 🚀 Features
 
-| Feature                              | Description                                                                 |
-|--------------------------------------|-----------------------------------------------------------------------------|
-| 🔗 Blog Summarization                | Accepts a blog URL and fetches its content                                |
-| 🧠 AI-Powered Summary                | Uses Cohere API to summarize extracted text                               |
-| 🌐 Urdu Translation                 | Auto-translates the summary into Urdu                                     |
-| 🧾 PDF Download                      | Download English summary in PDF format                                    |
-| 📱 Mobile Responsive UI              | Fully responsive, animated, and polished interface                        |
-| 🧩 State Management                  | LocalStorage to persist results during navigation                         |
-| 🗂️ History (via Supabase - optional) | Stores past summaries for future reference                                |
+| Feature                                   | Description                                                                    |
+| ------------------------------------------|------------------------------------------------------------------------------- |
+| 🔗 Blog Summarization                     | Accepts a blog URL and fetches its content                                     |
+| 🧠 AI-Powered Summary                     | Uses Cohere API to summarize extracted text                                    |
+| 🌐 Urdu Translation                       | Auto-translates the summary into Urdu                                          |
+| 📏 Summary Customization                  | User selects **length** (short/medium/long) and **format** (paragraph/bullets) |
+| 🧾 PDF Download                           | Download English summary in PDF format                                         |
+| 🐞 Bug Reporting Automation               | Errors are reported to your email via **n8n Webhook + Gmail** integration      |
+| 🐳 Docker Support                         | Run the app in a fully containerized setup using **Docker Compose**            |
+| 📱 Mobile Responsive UI                   | Fully responsive, animated, and polished interface                             |
+| 🧩 State Management                       | LocalStorage to persist results during navigation                              |
+| 🗂️ History (via Supabase & MongoDB Atlas) | Stores past summaries for future reference                                     |
+
 
 ---
 
