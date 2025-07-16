@@ -17,11 +17,11 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 | 🌐 Urdu Translation                       | Auto-translates the summary into Urdu                                          |
 | 📏 Summary Customization                  | User selects **length** (short/medium/long) and **format** (paragraph/bullets) |
 | 🧾 PDF Download                           | Download English summary in PDF format                                         |
-| 🐞 Bug Reporting Automation               | Errors are reported to your email via **n8n Webhook + Gmail** integration      |
+| 🐞 Bug Reporting Automation               | Errors are reported to via **n8n Webhook + Gmail** integration                 |
 | 🐳 Docker Support                         | Run the app in a fully containerized setup using **Docker Compose**            |
 | 📱 Mobile Responsive UI                   | Fully responsive, animated, and polished interface                             |
 | 🧩 State Management                       | LocalStorage to persist results during navigation                              |
-| 🗂️ History (via Supabase & MongoDB Atlas) | Stores past summaries for future reference                                     |
+| 🗂️ History (via Supabase & MongoDB Atlas) | Stores past summaries and blogs for future reference                           |
 
 
 ---
@@ -29,12 +29,13 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 ## 🧱 Technologies Used
 
 | Stack        | Details                                                              |
-|--------------|----------------------------------------------------------------------|
+| ------------ | -------------------------------------------------------------------- |
 | **Frontend** | Next.js 14, Tailwind CSS, Framer Motion                              |
 | **Backend**  | API Routes in Next.js                                                |
-| **AI**       | Cohere Summarizer AI
+| **AI**       | Cohere Summarizer AI                                                 |
 | **DBs**      | MongoDB for user/blog storage<br>Supabase for optional analytics     |
 | **PDF**      | jsPDF for generating downloadable PDF summaries                      |
+| **Infra**    | Docker + Docker Compose support, n8n cloud                           |
 
 ---
 
@@ -47,16 +48,31 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 │   ├── SummaryCard.tsx       # English summary display
 │   ├── UrduCard.tsx          # Urdu summary display
 │
-├── pages/
-│   ├── index.tsx             # Main page
-│   ├── result/page.tsx       # Summary output page
-│   ├── api/summarize.ts      # API route for summarizing and translating
+├── app/
+│   ├── api/summarize
+|   |       |── route.ts      # API route for summarizing,translating,storing
+|   ├── result
+|   |       |── page.tsx      # Result page i.e summaries
+│   ├── page.tsx              # Iutput page
+│   ├── globals.css           # Custom fonts and styles
 │
 ├── public/
 │   ├── logo.png              # App logo
-│
-├── styles/
-│   ├── globals.css           # Custom fonts and styles
+│   ├── favicon.ico           # favicon icon
+│   ├── fonts                 # Urdu font
+│   
+├── lib/
+│   ├── cohere.ts             # Get summary by cohere
+│   ├── mongo.ts              # Mongodb atlas connection
+│   ├── supabase.ts           # Supabase connection
+│   ├── translator.tsx        # Translate using mymemory
+│   
+├── utils/
+│   ├── bugReporter.ts        # Report bug via n8n cloud
+│   ├── scraper.ts            # Scrape the blog text to one string
+|
+├── Dockerfile                # Build process
+├── docker-compose.yaml       # Configuration and Deployment
 ```
 
 
@@ -105,7 +121,7 @@ Try it live: [https://summarize.vercel.app/](https://summarize.vercel.app/)
 
 ---
 
-## 👨‍💻 Local Development
+## 👨‍💻 Local Development 
 
 ```bash
 git clone https://github.com/yourusername/summarAIze.git
@@ -117,6 +133,32 @@ npm run dev
 
 Visit: `http://localhost:3000`
 
+---
+
+## 🐳 Docker Support
+
+Easily run the entire app locally via:
+
+```bash
+docker-compose up --build
+```
+
+---
+
+### 📬 Bug Reporting with n8n
+
+If any **server-side error** occurs — such as scraping failures, API timeouts, or translation issues — the app will automatically send an email to the developer with all relevant details.
+
+- ✅ Automatically triggered on server errors
+- 📩 Sends HTML-formatted emails using **Gmail SMTP**
+- 🔁 Powered by **n8n Webhook + Send Email node**
+- 🔧 Configured in `utils/bugReporter.ts`
+- 🕵️ Email includes:
+  - Blog **URL**
+  - **Error** message
+  - **Timestamp** of the issue
+
+> This helps the developer (me) get notified immediately when something goes wrong.
 
 ---
 
