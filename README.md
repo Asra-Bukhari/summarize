@@ -1,4 +1,5 @@
-# 🧠 SummarAIze - AI-Powered Blog Summarizer with Urdu Translation
+<h1 align="center">🧠 SummarAIze</h1>
+<p align="center"><i>AI-Powered Blog Summarizer with Urdu Translation</i></p>
 
 **SummarAIze** is a full-stack AI-powered web app that allows users to input any blog/article URL and instantly receive:
 - ✍️ A concise **English summary**
