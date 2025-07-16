@@ -1,5 +1,7 @@
-<h1 align="center">🧠 SummarAIze</h1>
+<h1 align="center">SummarAIze</h1>
 <p align="center"><i>AI-Powered Blog Summarizer with Urdu Translation</i></p>
+
+---
 
 **SummarAIze** is a full-stack AI-powered web app that allows users to input any blog/article URL and instantly receive:
 - ✍️ A concise **English summary**
@@ -93,15 +95,15 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 
 ### 🟢 MongoDB
 
-* Used to store **blog content**, summaries, and optionally users.
-* Connected via `MONGODB_URI`
-* **Collection**: `blogs`
+* Used to store **blog content**, summaries, and optionally users.                | Mongo Database                        |       
+* Connected via `MONGODB_URI`                                                     | --------------------------------------|
+* **Collection**: `blogs`                                                         | ![mongoDB](./screenshots/mongoDB.png) |
 
 ### 🟣 Supabase
 
-* Used to store **summary metadata** and history.
-* Connected via `SUPABASE_URL` and `SUPABASE_KEY`
-* **Table**: `summaries`
+* Used to store **summary metadata** and history.                                | Supabase                                |
+* Connected via `SUPABASE_URL` and `SUPABASE_KEY`                                | ----------------------------------------|
+* **Table**: `summaries`                                                         | ![Supabase](./screenshots/supabase.png) |
 
 
 ---
@@ -150,14 +152,14 @@ docker-compose up --build
 
 If any **server-side error** occurs — such as scraping failures, API timeouts, or translation issues — the app will automatically send an email to the developer with all relevant details.
 
-- ✅ Automatically triggered on server errors
-- 📩 Sends HTML-formatted emails using **Gmail SMTP**
+- ✅ Automatically triggered on server errors                      
+- 📩 Sends HTML-formatted emails using **Gmail SMTP**              
 - 🔁 Powered by **n8n Webhook + Send Email node**
 - 🔧 Configured in `utils/bugReporter.ts`
 - 🕵️ Email includes:
-  - Blog **URL**
-  - **Error** message
-  - **Timestamp** of the issue
+  - Blog **URL**                                                 | n8n Workflow                           |
+  - **Error** message                                            | ---------------------------------------|
+  - **Timestamp** of the issue                                   | ![n8n](./screenshots/n8n-workflow.png) |
 
 > This helps the developer (me) get notified immediately when something goes wrong.
 
