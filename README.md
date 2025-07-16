@@ -50,9 +50,9 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 │
 ├── app/
 │   ├── api/summarize
-|   |       |── route.ts      # API route for summarizing,translating,storing
-|   ├── result
-|   |       |── page.tsx      # Result page i.e summaries
+│   │       ├──  route.ts      # API route for summarizing,translating,storing
+│   ├── result
+│   │       ├──  page.tsx      # Result page i.e summaries
 │   ├── page.tsx              # Iutput page
 │   ├── globals.css           # Custom fonts and styles
 │
@@ -70,7 +70,7 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 ├── utils/
 │   ├── bugReporter.ts        # Report bug via n8n cloud
 │   ├── scraper.ts            # Scrape the blog text to one string
-|
+│
 ├── Dockerfile                # Build process
 ├── docker-compose.yaml       # Configuration and Deployment
 ```
@@ -145,7 +145,7 @@ docker-compose up --build
 
 ---
 
-### 📬 Bug Reporting with n8n
+## 📬 Bug Reporting with n8n
 
 If any **server-side error** occurs — such as scraping failures, API timeouts, or translation issues — the app will automatically send an email to the developer with all relevant details.
 
