@@ -128,6 +128,8 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
   </tr>
 </table>
 
+
+
 ---
 
 ## 📸 Demo
