@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from "react";
 import SummaryCard from "@/components/SummaryCard";
@@ -15,10 +15,8 @@ export default function ResultPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const eng = localStorage.getItem("summary") || "";
-    const urdu = localStorage.getItem("urdu") || "";
-    setSummary(eng);
-    setUrduSummary(urdu);
+    setSummary(localStorage.getItem("summary") || "");
+    setUrduSummary(localStorage.getItem("urdu") || "");
   }, []);
 
   const handleDownload = () => {
@@ -26,12 +24,9 @@ export default function ResultPage() {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(16);
     doc.text("English Summary", 20, 30);
-
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
-    const lines = doc.splitTextToSize(summary, 170);
-    doc.text(lines, 20, 50);
-
+    doc.text(doc.splitTextToSize(summary, 170), 20, 50);
     doc.save("SummarAIze_Blog_Summary.pdf");
   };
 
@@ -53,7 +48,10 @@ export default function ResultPage() {
       >
         {/* Back Button */}
         <button
-          onClick={() => router.push("/")}
+          onClick={() => {
+            speechSynthesis.cancel();
+            router.push("/");
+          }}
           className="absolute top-4 left-4 z-10 flex items-center text-blue-800 hover:text-[#50C9CE] transition-colors duration-300"
         >
           <ArrowLeft className="w-5 h-5 mr-1" />
@@ -69,26 +67,21 @@ export default function ResultPage() {
           <span className="text-sm font-medium">Download PDF</span>
         </button>
 
-{/* Title with Logo */}
-<div className="flex items-center justify-center ml-[-30px] sm:ml-[-45px] mt-15 sm:mt-0">
-  <Image src="/logo.png" alt="logo" width={52} height={52} />
-  <h1
-    className="text-2xl sm:text-2xl font-bold text-center -ml-1"
-    style={{
-      textShadow: "1px 1px 0 #00000022, 2px 2px 0 #00000011",
-    }}
-  >
-    <span className="text-[#50C9CE]">Summar</span>
-    <span className="text-blue-900">AI</span>
-    <span className="text-[#50C9CE]">ze</span>
-  </h1>
-</div>
+        {/* Logo and Title */}
+        <div className="flex items-center justify-center ml-[-30px] sm:ml-[-45px] mt-15 sm:mt-0">
+          <Image src="/logo.png" alt="logo" width={52} height={52} />
+          <h1
+            className="text-2xl sm:text-2xl font-bold text-center -ml-1"
+            style={{ textShadow: "1px 1px 0 #00000022, 2px 2px 0 #00000011" }}
+          >
+            <span className="text-[#50C9CE]">Summar</span>
+            <span className="text-blue-900">AI</span>
+            <span className="text-[#50C9CE]">ze</span>
+          </h1>
+        </div>
 
-
-        {/* English Summary */}
+        {/* Cards */}
         <SummaryCard summary={summary} />
-
-        {/* Urdu Summary */}
         <UrduCard summary={urduSummary} />
       </motion.div>
     </main>

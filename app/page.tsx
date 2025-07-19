@@ -44,7 +44,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Conditional LoadingView */}
+        {/* LoadingView */}
         {isLoading ? (
           <LoadingView />
         ) : (
