@@ -19,6 +19,7 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 | 🧠 AI-Powered Summary                     | Uses Cohere API to summarize extracted text                                    |
 | 🌐 Urdu Translation                       | Auto-translates the summary into Urdu                                          |
 | 📏 Summary Customization                  | User selects **length** (short/medium/long) and **format** (paragraph/bullets) |
+| 🗣️ Copy / Share / Speech Support          | Users can **copy**, **share**, or **listen** to both English and Urdu summaries|
 | 🧾 PDF Download                           | Download English summary in PDF format                                         |
 | 🐞 Bug Reporting Automation               | Errors are reported to via **n8n Webhook + Gmail** integration                 |
 | 🐳 Docker Support                         | Run the app in a fully containerized setup using **Docker Compose**            |
@@ -36,6 +37,7 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 | **Frontend** | Next.js 14, Tailwind CSS, Framer Motion                              |
 | **Backend**  | API Routes in Next.js                                                |
 | **AI**       | Cohere Summarizer AI                                                 |
+| **TTS**      | Google Cloud Text-to-Speech (for Urdu audio)                         |
 | **DBs**      | MongoDB for user/blog storage<br>Supabase for optional analytics     |
 | **PDF**      | jsPDF for generating downloadable PDF summaries                      |
 | **Infra**    | Docker + Docker Compose support, n8n cloud                           |
@@ -52,12 +54,12 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 │   ├── UrduCard.tsx          # Urdu summary display
 │
 ├── app/
-│   ├── api/summarize
-│   │       ├──  route.ts      # API route for summarizing,translating,storing
-│   ├── result
-│   │       ├──  page.tsx      # Result page i.e summaries
-│   ├── page.tsx              # Iutput page
-│   ├── globals.css           # Custom fonts and styles
+│   ├── api/
+│   │   ├── summarize/route.ts   # Summarize + Translate + Store
+│   │   ├── tts/route.ts         # Urdu Text-to-Speech API
+│   ├── result/page.tsx         # Result page i.e summaries
+│   ├── page.tsx                # Input page
+│   ├── globals.css             # Custom fonts and styles
 │
 ├── public/
 │   ├── logo.png              # App logo
@@ -81,12 +83,13 @@ This project uses modern technologies like **Next.js**, **Cohere AI**, **MongoDB
 
 ## 📁 Environment Variables
 
-| Variable         | Purpose                                                             |
-| ---------------- | ------------------------------------------------------------------- |
-| `COHERE_API_KEY` | Used to call the Cohere Summarize API                               |
-| `MONGODB_URI`    | Connects to MongoDB Atlas for storing parsed blog content           |
-| `SUPABASE_URL`   | URL for your Supabase project (optional logging/history support)    |
-| `SUPABASE_KEY`   | Supabase anon/public key used to access Supabase tables client-side |
+| Variable             | Purpose                                                                 |
+| -------------------- | ----------------------------------------------------------------------- |
+| `COHERE_API_KEY`     | Used to call the Cohere Summarize API                                   |
+| `MONGODB_URI`        | Connects to MongoDB Atlas for storing parsed blog content               |
+| `SUPABASE_URL`       | URL for your Supabase project (optional logging/history support)        |
+| `SUPABASE_KEY`       | Supabase anon/public key used to access Supabase tables client-side     |
+| `GOOGLE_TTS_API_KEY` | Enables Urdu text-to-speech via Google Cloud Text-to-Speech API         |
 
 
 ---
