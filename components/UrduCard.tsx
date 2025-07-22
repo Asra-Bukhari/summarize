@@ -1,52 +1,51 @@
-'use client';
+"use client";
 
-declare global {
-  interface Window {
-    responsiveVoice: any;
-  }
-}
-
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useEffect, useState } from "react";
 import { Check, Copy, Mic, MicOff, Share2 } from "lucide-react";
 
 export default function UrduCard({ summary }: { summary: string }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [voiceLoaded, setVoiceLoaded] = useState(false);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // Load voices after responsiveVoice is ready
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (window.responsiveVoice?.speak) {
-        setVoiceLoaded(true);
-        clearInterval(interval);
-      }
-    }, 300);
-
-    return () => {
-      clearInterval(interval);
-      window.responsiveVoice?.cancel();
-    };
-  }, []);
-
-  const toggleSpeak = () => {
-    if (!voiceLoaded) return console.warn("Urdu voice not ready.");
-
+  const toggleSpeak = async () => {
     if (isSpeaking) {
-      window.responsiveVoice.cancel();
+      audio?.pause();
       setIsSpeaking(false);
-    } else {
-      const voices = window.responsiveVoice.getVoices();
-      const urduVoice =
-        voices.find((v: any) =>
-          v.name.toLowerCase().includes("urdu")
-        )?.name || "Hindi Male"; 
+      return;
+    }
 
-      window.responsiveVoice.speak(summary, urduVoice, {
-        onend: () => setIsSpeaking(false),
+    try {
+      setLoading(true);
+
+      const res = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: summary }),
       });
+
+      const data = await res.json();
+
+      if (!data.audioContent) {
+        alert("Urdu TTS failed.");
+        return;
+      }
+
+      const audioElement = new Audio(`data:audio/mp3;base64,${data.audioContent}`);
+      audioElement.play();
       setIsSpeaking(true);
+      setAudio(audioElement);
+
+      audioElement.onended = () => {
+        setIsSpeaking(false);
+      };
+    } catch (err) {
+      console.error("TTS error:", err);
+      alert("Error generating Urdu audio.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,21 +63,59 @@ export default function UrduCard({ summary }: { summary: string }) {
     }
   };
 
+  
+  useEffect(() => {
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    };
+  }, [audio]);
+
   return (
     <Card dir="rtl" className="relative">
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle className="text-green-700">اردو خلاصہ</CardTitle>
           <div className="flex items-center gap-4">
+            {/* Mic Button */}
             <button
               onClick={toggleSpeak}
-              disabled={!voiceLoaded}
+              disabled={loading}
               className={`${isSpeaking ? "text-blue-600" : "text-gray-700"} ${
-                !voiceLoaded ? "opacity-50 cursor-not-allowed" : ""
+                loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              {isSpeaking ? <MicOff size={20} /> : <Mic size={20} />}
+              {loading ? (
+                <svg
+                  className="w-5 h-5 text-blue-600 animate-spin"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  ></path>
+                </svg>
+              ) : isSpeaking ? (
+                <MicOff size={20} />
+              ) : (
+                <Mic size={20} />
+              )}
             </button>
+
+            {/* Copy Button */}
             <button onClick={copyToClipboard}>
               {copied ? (
                 <Check size={20} className="text-green-500" />
@@ -86,6 +123,8 @@ export default function UrduCard({ summary }: { summary: string }) {
                 <Copy size={20} />
               )}
             </button>
+
+            {/* Share Button */}
             <button onClick={shareSummary}>
               <Share2 size={20} />
             </button>
